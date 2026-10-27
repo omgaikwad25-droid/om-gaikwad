@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FarmDirect - Demo Orders</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header"><a class="brand" href="{{ url_for('index') }}">🌱 FarmDirect</a><nav><a href="{{ url_for('index') }}">Back to store</a></nav></header>
+<section class="section">
+  <p class="eyebrow">CLASSROOM DEMO</p><h1>Orders received</h1>
+  <p class="small-note">This demo page has no login. Do not publish it publicly without adding authentication.</p>
+  {% if orders %}
+  <div class="orders-table-wrap"><table><thead><tr><th>Order</th><th>Date</th><th>Customer</th><th>Phone</th><th>Address</th><th>Items</th><th>Total</th></tr></thead><tbody>
+  {% for o in orders %}<tr><td>#{{ o.id }}</td><td>{{ o.created_at }}</td><td>{{ o.customer_name }}</td><td>{{ o.phone }}</td><td>{{ o.address }}</td><td>{{ o.items }}</td><td>₹{{ "%.2f"|format(o.total) }}</td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<p class="empty-state">No orders have been placed yet.</p>{% endif %}
+</section>
+</body></html>
